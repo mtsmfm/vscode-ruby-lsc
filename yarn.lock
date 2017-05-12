@@ -1608,6 +1608,21 @@ vinyl@~2.0.1:
     remove-trailing-separator "^1.0.1"
     replace-ext "^1.0.0"
 
+vscode-jsonrpc@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.2.0.tgz#c92b946ac385c8b41439b842b6bd07d517b64a7d"
+
+vscode-languageclient@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/vscode-languageclient/-/vscode-languageclient-3.2.2.tgz#7843839614aa099f172b4e5f8967d42b58d77f0d"
+  dependencies:
+    vscode-jsonrpc "^3.2.0"
+    vscode-languageserver-types "^3.2.0"
+
+vscode-languageserver-types@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.2.0.tgz#8874ed92dbfa66df5fb0e2bf73f614cf9483be8f"
+
 vscode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vscode/-/vscode-1.1.0.tgz#b04c2399b6ec768135c9688e7873d776e28dcb95"
