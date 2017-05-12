@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  app:
+    image: node
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - home:/home/node
+volumes:
+  home:
