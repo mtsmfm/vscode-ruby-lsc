@@ -36,6 +36,7 @@
         "vscode": "^1.0.0"
     },
     "dependencies": {
+        "vsce": "^1.22.0",
         "vscode-languageclient": "^3.2.2"
     }
 }
