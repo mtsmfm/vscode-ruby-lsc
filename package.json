@@ -2,6 +2,7 @@
     "name": "ruby-lsc",
     "displayName": "Ruby language server client",
     "description": "",
+    "license": "MIT",
     "version": "0.0.1",
     "publisher": "mtsmfm",
     "engines": {
@@ -11,17 +12,9 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onLanguage:ruby"
     ],
     "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
-    },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
         "compile": "tsc -watch -p ./",
@@ -36,7 +29,21 @@
         "vscode": "^1.0.0"
     },
     "dependencies": {
+        "mz": "^2.6.0",
         "vsce": "^1.22.0",
         "vscode-languageclient": "^3.2.2"
+    },
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Ruby Language Server Client",
+            "properties": {
+                "ruby-lsc.commandWithArgs": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Command to execute language_server-ruby"
+                }
+            }
+        }
     }
 }

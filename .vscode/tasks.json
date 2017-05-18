@@ -11,7 +11,7 @@
     "version": "0.1.0",
 
     // the command is a shell script
-    "isShellCommand": true,
+    "isShellCommand": false,
 
     // show the output window only if unrecognized errors occur.
     "showOutput": "silent",

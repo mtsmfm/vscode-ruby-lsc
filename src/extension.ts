@@ -1,29 +1,58 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+
 import * as vscode from 'vscode';
+import { execFile } from 'mz/child_process';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+import { LanguageClient, LanguageClientOptions } from 'vscode-languageclient';
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "ruby-lsp" is now active!');
+export async function activate(context: vscode.ExtensionContext) {
+    const conf = vscode.workspace.getConfiguration("ruby-lsc");
+    let [command, ...args] = (<[string]>conf.get("commandWithArgs"));
+    if (!command) {
+        try {
+            const uris = await vscode.workspace.findFiles("Gemfile");
+            let rubyVersion = null;
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+            for (const uri of uris) {
+                const doc = await vscode.workspace.openTextDocument(uri);
+                const match = doc.getText().match(/ *ruby +['"](\d+\.\d+\.\d+)['"]/);
+                if (match) {
+                    rubyVersion = match[1];
+                    break;
+                }
+            }
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
+            const tag = rubyVersion ? `ruby-${rubyVersion}` : "latest";
+            const image = `mtsmfm/language_server-ruby:${tag}`;
+
+            vscode.window.withProgress({title: "ruby-lsc", location: vscode.ProgressLocation.Window}, async progress => {
+                progress.report({message: `Pulling ${image}`});
+
+                await execFile("docker", ["pull", image]);
+            });
+
+            command = "docker";
+            args = ["run", "--rm", "-i", "-v", `${vscode.workspace.rootPath}:${vscode.workspace.rootPath}`, image];
+        } catch (err) {
+            if (err.code == "ENOENT") {
+                const selected = await vscode.window.showErrorMessage(
+                    'Docker executable not found. Install Docker or set ruby-lsc.commandWithArgs setting',
+                    {modal: true},
+                    'Open settings'
+                );
+                if (selected === 'Open settings') {
+                    await vscode.commands.executeCommand('workbench.action.openWorkspaceSettings');
+                }
+            } else {
+                vscode.window.showErrorMessage('Error execution Language Server via Docker: ' + err.message);
+                console.error(err);
+            }
+        }
+    }
+    const clientOptions: LanguageClientOptions = {
+        documentSelector: ['ruby'],
+    };
+    const disposable = new LanguageClient('Language Server Ruby', {command, args, options: {cwd: vscode.workspace.rootPath}}, clientOptions).start();
 
     context.subscriptions.push(disposable);
-}
-
-// this method is called when your extension is deactivated
-export function deactivate() {
 }
