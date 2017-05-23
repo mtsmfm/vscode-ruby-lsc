@@ -33,6 +33,13 @@
         "vsce": "^1.22.0",
         "vscode-languageclient": "^3.2.2"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mtsmfm/vscode-ruby-lsc.git"
+    },
+    "bugs": {
+        "url": "https://github.com/mtsmfm/vscode-ruby-lsc"
+    },
     "contributes": {
         "configuration": {
             "type": "object",
