@@ -3,7 +3,7 @@
     "displayName": "Ruby Language Server Client",
     "description": "A Ruby Language Server Client",
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "publisher": "mtsmfm",
     "engines": {
         "vscode": "^1.12.0"
