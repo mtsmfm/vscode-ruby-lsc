@@ -25,7 +25,7 @@ export async function activate(context: vscode.ExtensionContext) {
             const tag = rubyVersion ? `ruby-${rubyVersion}` : "latest";
             const image = `mtsmfm/language_server-ruby:${tag}`;
 
-            vscode.window.withProgress({title: "ruby-lsc", location: vscode.ProgressLocation.Window}, async progress => {
+            await vscode.window.withProgress({title: "ruby-lsc", location: vscode.ProgressLocation.Window}, async progress => {
                 progress.report({message: `Pulling ${image}`});
 
                 await execFile("docker", ["pull", image]);
