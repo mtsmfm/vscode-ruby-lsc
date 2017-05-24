@@ -1,7 +1,7 @@
 {
     "name": "ruby-lsc",
-    "displayName": "Ruby language server client",
-    "description": "",
+    "displayName": "Ruby Language Server Client",
+    "description": "A Ruby Language Server Client",
     "license": "MIT",
     "version": "0.0.2",
     "publisher": "mtsmfm",
