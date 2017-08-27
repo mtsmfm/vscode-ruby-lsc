@@ -10,20 +10,7 @@ export async function activate(context: vscode.ExtensionContext) {
     let [command, ...args] = (<[string]>conf.get("commandWithArgs"));
     if (!command) {
         try {
-            const uris = await vscode.workspace.findFiles("Gemfile");
-            let rubyVersion = null;
-
-            for (const uri of uris) {
-                const doc = await vscode.workspace.openTextDocument(uri);
-                const match = doc.getText().match(/ *ruby +['"](\d+\.\d+\.\d+)['"]/);
-                if (match) {
-                    rubyVersion = match[1];
-                    break;
-                }
-            }
-
-            const tag = rubyVersion ? `ruby-${rubyVersion}` : "latest";
-            const image = `mtsmfm/language_server-ruby:${tag}`;
+            const image = "mtsmfm/language_server-ruby:latest";
 
             await vscode.window.withProgress({title: "ruby-lsc", location: vscode.ProgressLocation.Window}, async progress => {
                 progress.report({message: `Pulling ${image}`});
