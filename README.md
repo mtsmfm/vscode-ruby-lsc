@@ -9,6 +9,20 @@ The recommended way to boot a language server is using docker.
 
 https://docs.docker.com/engine/installation
 
+## Configuration
+
+### ruby-lsc.commandWithArgs
+
+You can specify how to boot the language server like following:
+
+```json
+{
+    "ruby-lsc.commandWithArgs": [
+        "docker-compose", "run", "--rm", "app"
+    ]
+}
+```
+
 ## Development
 
 This section explains how to start development vscode-ruby-lsc with language_server-ruby.
