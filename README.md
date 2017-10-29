@@ -27,9 +27,9 @@ https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
 
 1. Setup vscode-ruby-lsc
 
-    $ git clone https://github.com/mtsmfm/vscode-ruby-lsc.git
-    $ cd vscode-ruby-lsc
-    $ docker-compose run app yarn install
+        $ git clone https://github.com/mtsmfm/vscode-ruby-lsc.git
+        $ cd vscode-ruby-lsc
+        $ docker-compose run app yarn install
 
 2. Setup language_server-ruby
 
@@ -39,8 +39,8 @@ Follow https://github.com/mtsmfm/language_server-ruby#development
 
 1. Open vscode-ruby-lsc via vscode
 
-    $ cd /path/to/vscode-ruby-lsc
-    $ code .
+        $ cd /path/to/vscode-ruby-lsc
+        $ code .
 
 2. Start debug (press F5)
 
